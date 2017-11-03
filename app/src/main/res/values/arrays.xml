@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Ian Buttimer.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <string-array name="recipe_types">
+        <item>food</item>
+        <item>bread</item>
+        <item>brownie</item>
+        <item>cupcake</item>
+        <item>cake</item>
+        <item>cookies</item>
+        <item>doughnut</item>
+        <item>pie</item>
+    </string-array>
+    <integer-array name="recipe_images">
+        <item>@drawable/ic_food</item>
+        <item>@drawable/ic_bread</item>
+        <item>@drawable/ic_brownie</item>
+        <item>@drawable/ic_cupcake</item>
+        <item>@drawable/ic_cake</item>
+        <item>@drawable/ic_cookies</item>
+        <item>@drawable/ic_doughnut</item>
+        <item>@drawable/ic_pie</item>
+    </integer-array>
+
+    <array name="pref_cache_length_titles">
+        <item>@string/pref_title_cache_1_day</item>
+        <item>@string/pref_title_cache_2_day</item>
+        <item>@string/pref_title_cache_5_day</item>
+        <item>@string/pref_title_cache_1_week</item>
+        <item>@string/pref_title_cache_2_week</item>
+    </array>
+    <string-array name="pref_cache_length_values" translatable="false">
+        <item>@string/pref_cache_1_day</item>
+        <item>@string/pref_cache_2_day</item>
+        <item>@string/pref_cache_5_day</item>
+        <item>@string/pref_cache_1_week</item>
+        <item>@string/pref_cache_2_week</item>
+    </string-array>
+
+</resources>

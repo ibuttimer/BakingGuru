@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017 Ian Buttimer.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_ingredient_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/sml_margin"
+    android:layout_marginStart="@dimen/sml_margin"
+    android:layout_marginRight="@dimen/sml_margin"
+    android:layout_marginEnd="@dimen/sml_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_quantity_ingredient_list_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.175"
+            tools:text="@string/quantity" />
+        <TextView
+            android:id="@+id/tv_measure_ingredient_list_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.825"
+            android:layout_marginLeft="@dimen/sml_margin"
+            android:layout_marginStart="@dimen/sml_margin"
+            android:textStyle="italic"
+            tools:text="@string/measure" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_ingredient_ingredient_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/ingredient" />
+</LinearLayout>

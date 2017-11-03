@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "113184524760",
+    "firebase_url": "https://bakingguru-8bd64.firebaseio.com",
+    "project_id": "bakingguru-8bd64",
+    "storage_bucket": "bakingguru-8bd64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113184524760:android:d55a81016f6c75a7",
+        "android_client_info": {
+          "package_name": "ie.ianbuttimer.bakingguru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113184524760-ckvh6agfm53ogskjstm6qudlu2isum0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMWQECVwBaHxuzrd7DVbi6v0DBOXC9Zcc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

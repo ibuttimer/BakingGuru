@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- https://material.io/color/#!/?view.left=0&view.right=0&primary.color=FF1744&secondary.color=FFEA00
+
+    https://material.io/color/#!/?view.left=0&view.right=0&primary.color=FF1744&secondary.color=FFD600
+    -->
+    <color name="colorPrimary">#ff1744</color>
+    <color name="colorPrimaryDark">#c4001d</color>
+    <color name="colorPrimaryLight">#ff616f</color>
+    <!--<color name="colorPrimaryText">#000000</color>-->
+    <color name="colorPrimaryText">#ffffff</color>
+    <color name="colorAccent">#ffd600</color>
+    <color name="colorAccentDark">#c7a500</color>
+    <color name="colorAccentLight">#ffff52</color>
+    <color name="colorAccentText">#000000</color>
+
+    <color name="colorRecipeNameText">#ffffff</color>
+    <color name="colorPlayerControlBackground">#9aff616f</color>
+    <color name="colorPlayerControlText">#fffefe</color>
+</resources>

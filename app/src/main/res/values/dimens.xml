@@ -1,0 +1,61 @@
+<!--
+  ~ Copyright (c) 2017 Ian Buttimer.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">150dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="sml_margin">5dp</dimen>
+    <dimen name="sml_padding">5dp</dimen>
+    <dimen name="table_padding">3dp</dimen>
+    <dimen name="badge_padding">3dp</dimen>
+    <dimen name="text_margin">@dimen/fab_margin</dimen>
+    <dimen name="cardview_corner">6dp</dimen>
+    <dimen name="banner_text">40sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+    <dimen name="medium_text">15sp</dimen>
+    <dimen name="separator_line">1dp</dimen>
+    <dimen name="small_text">10sp</dimen>
+    <dimen name="small_progress_bar">21dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">@dimen/fab_margin</dimen>
+    <dimen name="activity_vertical_margin">@dimen/fab_margin</dimen>
+    <dimen name="recipe_name_text">18sp</dimen>
+    <dimen name="step_description_text">16sp</dimen>
+    <dimen name="step_title_text">18sp</dimen>
+    <dimen name="ingredient_qty_measure_width">40dp</dimen>
+
+    <!--
+        Refer to App Widget Documentation for margin information
+        http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_border">2dp</dimen>
+    <dimen name="widget_corner">6dp</dimen>
+    <dimen name="widget_name_text">18sp</dimen>
+    <!-- from https://developer.android.com/guide/practices/ui_guidelines/widget_design.html
+            n cells = 70 × n − 30
+        -->
+    <dimen name="widget_1_cell">40dp</dimen>
+    <dimen name="widget_2_cell">110dp</dimen>
+    <dimen name="widget_3_cell">180dp</dimen>
+    <dimen name="widget_4_cell">250dp</dimen>
+
+    <dimen name="player_control_border">2dp</dimen>
+    <dimen name="player_control_corner">4dp</dimen>
+
+</resources>

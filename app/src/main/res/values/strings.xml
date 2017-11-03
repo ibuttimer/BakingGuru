@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Baking Guru</string>
+    <string name="action_home">Home</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
+    <string name="title_item_detail">Item Detail</string>
+
+    <string name="food_image">Food image</string>
+
+
+    <string name="unavailable">Unavailable</string>
+    <string name="no_response">No response received.\nPlease check the network state.</string>
+    <string name="invalid_response">Invalid response received.\nPlease try again later.</string>
+    <string name="network_na">Network unavailable.\nPlease check Wifi and/or mobile data settings.</string>
+    <string name="cant_contact_server">Unable to contact server.\nPlease check Wifi and/or mobile data settings.</string>
+    <string name="unauthorised_access">Server access is not authorised.</string>
+    <string name="retry">Retry</string>
+
+    <string name="no_recipes_to_del">No recipes to delete.</string>
+    <plurals name="deleted_recipes">
+        <item quantity="one">%d recipe deleted.</item>
+        <item quantity="other">%d recipes deleted.</item>
+    </plurals>
+
+
+    <string name="json_asset_file" translatable="false">baking.json</string>
+    <string name="json_network_resource" translatable="false">http://go.udacity.com/android-baking-app-json</string>
+
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat blandit aliquam etiam erat velit scelerisque in.</string>
+
+    <string name="prepopulate_db_key" translatable="false">PREPOPULATE_DB</string>
+
+</resources>

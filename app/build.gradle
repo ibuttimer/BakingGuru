@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 2017 Ian Buttimer.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "ie.ianbuttimer.bakingguru"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // not needed as IdlingResource requirement in ItemListActivity means its required as a compile dependency
+    //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //        exclude group: 'com.android.support', module: 'support-annotations'
+    //    })
+    // TODO conditional dependency for debug mode
+
+
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    compile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'org.parceler:parceler-api:1.1.9'
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    compile 'com.android.support:support-vector-drawable:26.0.0-alpha1'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'org.parceler:parceler:1.1.9'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.github.devahamed:multi-view-adapter:1.2.3'
+    compile 'com.android.support:preference-v7:26.0.0-alpha1'
+}
+
+
+
+
+
+
