@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -207,9 +206,6 @@ public class ItemDetailFragment extends Fragment implements Player.EventListener
             });
         }
 
-        // Initialize the player.
-        initializePlayer();
-
         getActivity().setTitle(mRecipe.getName());
 
         return rootView;
@@ -223,6 +219,13 @@ public class ItemDetailFragment extends Fragment implements Player.EventListener
         if (mHost != null) {
             mHost.setData(mRecipe, mStepIndex);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Initialize the player.
+        initializePlayer();
     }
 
     @Override
@@ -241,7 +244,6 @@ public class ItemDetailFragment extends Fragment implements Player.EventListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        releasePlayer();
         mUnbinder.unbind();
     }
 
@@ -259,6 +261,7 @@ public class ItemDetailFragment extends Fragment implements Player.EventListener
     public void onStop() {
         super.onStop();
         unregisterNetworkStatusListener();
+        releasePlayer();
     }
 
     /**
@@ -619,7 +622,8 @@ public class ItemDetailFragment extends Fragment implements Player.EventListener
 
         @Override
         public void onSkipToPrevious() {
-            mExoPlayer.seekTo(0);
+            mPosition = 0;
+            mExoPlayer.seekTo(mPosition);
         }
     }
 
