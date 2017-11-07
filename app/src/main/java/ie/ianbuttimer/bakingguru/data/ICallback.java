@@ -100,7 +100,8 @@ public interface ICallback {
      * @param activity      Current activity
      * @param loaderId      Id of loader
      * @param uri           The URI for the newly inserted item.
-     * @param contentValues A set of column_name/value pairs to add to the database.   @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#insert(android.net.Uri, android.content.ContentValues)">ContentProvider.insert(Uri, ContentValues)</a>
+     * @param contentValues A set of column_name/value pairs to add to the database.
+     * @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#insert(android.net.Uri, android.content.ContentValues)">ContentProvider.insert(Uri, ContentValues)</a>
      */
     void insert(@NonNull FragmentActivity activity, int loaderId, @NonNull Uri uri, @Nullable ContentValues contentValues);
 
@@ -112,7 +113,8 @@ public interface ICallback {
      * @param projection    The list of columns to put into the cursor
      * @param selection     A selection criteria to apply when filtering rows
      * @param selectionArgs You may include ?s in selection, which will be replaced by the values from selectionArgs, in order that they appear in the selection
-     * @param sortOrder     How the rows in the cursor should be sorted      @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query(Uri, String[], String, String[], String)</a>
+     * @param sortOrder     How the rows in the cursor should be sorted
+     * @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query(Uri, String[], String, String[], String)</a>
      */
     void query(@NonNull FragmentActivity activity, int loaderId, @NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder);
 
@@ -134,7 +136,8 @@ public interface ICallback {
      * @param loaderId      Id of loader
      * @param uri           The URI for the newly inserted item.
      * @param selection     An optional filter to match rows to update
-     * @param selectionArgs You may include ?s in selection, which will be replaced by the values from selectionArgs, in order that they appear in the selection    @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentProvider.delete(Uri, String, String[])</a>
+     * @param selectionArgs You may include ?s in selection, which will be replaced by the values from selectionArgs, in order that they appear in the selection
+     * @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentProvider.delete(Uri, String, String[])</a>
      */
     void delete(@NonNull FragmentActivity activity, int loaderId, @NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs);
 
@@ -143,7 +146,8 @@ public interface ICallback {
      * @param activity      Current activity
      * @param loaderId      Id of loader
      * @param uri           The URI for the newly inserted item.
-     * @param contentValues A set of column_name/value pairs to add to the database.   @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#bulkInsert(android.net.Uri, android.content.ContentValues[])">ContentProvider.bulkInsert(Uri, ContentValues[])</a>
+     * @param contentValues A set of column_name/value pairs to add to the database.
+     * @see <a href="https://developer.android.com/reference/android/content/ContentProvider.html#bulkInsert(android.net.Uri, android.content.ContentValues[])">ContentProvider.bulkInsert(Uri, ContentValues[])</a>
      */
     void bulkInsert (@NonNull FragmentActivity activity, int loaderId, @NonNull Uri uri, @Nullable ContentValues[] contentValues);
 

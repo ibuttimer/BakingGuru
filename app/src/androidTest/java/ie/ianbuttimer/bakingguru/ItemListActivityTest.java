@@ -17,12 +17,9 @@
 
 package ie.ianbuttimer.bakingguru;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.IdRes;
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;

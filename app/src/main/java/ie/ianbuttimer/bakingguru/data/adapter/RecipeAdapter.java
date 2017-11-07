@@ -18,11 +18,11 @@
 package ie.ianbuttimer.bakingguru.data.adapter;
 
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +33,8 @@ import butterknife.Unbinder;
 import ie.ianbuttimer.bakingguru.bake.AbstractBakeObject;
 import ie.ianbuttimer.bakingguru.bake.Recipe;
 import ie.ianbuttimer.bakingguru.R;
+import ie.ianbuttimer.bakingguru.image.AbstractImageLoader;
+import ie.ianbuttimer.bakingguru.image.RecipeImageLoader;
 
 /**
  * Adapter class for a RecyclerView of Recipe objects
@@ -55,6 +57,14 @@ public class RecipeAdapter extends AbstractBakeRecycleViewAdapter<Recipe> {
         return new RecipeViewHolder(view, clickHandler);
     }
 
+    @Override
+    public void onViewRecycled(AbstractBakeViewHolder holder) {
+        RecipeViewHolder viewHolder = (RecipeViewHolder) holder;
+        viewHolder.onViewRecycled();
+
+        super.onViewRecycled(holder);
+    }
+
     /**
      * A RecyclerView.ViewHolder for Recipe objects
      */
@@ -63,7 +73,9 @@ public class RecipeAdapter extends AbstractBakeRecycleViewAdapter<Recipe> {
 
         @BindView(R.id.tv_name_recipe_list_item) TextView mNameTextView;
         @BindView(R.id.iv_poster_recipe_list_item) ImageView mImageImageView;
+        @BindView(R.id.pb_poster_recipe_list_item) ProgressBar mImageProgressBar;
 
+        private BakeViewImageLoader<Recipe> mImageLoader;
         private Unbinder unbinder;
 
         /**
@@ -75,16 +87,43 @@ public class RecipeAdapter extends AbstractBakeRecycleViewAdapter<Recipe> {
             super(view, clickHandler);
 
             unbinder = ButterKnife.bind(this, view);
+
+            mImageLoader = new BakeViewImageLoader<>(mImageImageView, new BakeViewImageLoader.IBakeViewImageLoader<Recipe>() {
+                @Override
+                public void setDefaultImage() {
+                    setDefaultRecipeImage();
+                }
+
+                @Override
+                public AbstractImageLoader<Recipe> getNewImageLoader() {
+                    return new RecipeImageLoader(mImageImageView, mImageProgressBar);
+                }
+            });
         }
 
 
         @Override
         public void setViewInfo(Recipe info) {
-            Context context = getContext();
+            super.setViewInfo(info);
 
             mNameTextView.setText(info.getName());
-            mImageImageView.setImageResource(info.getType().getImage(context));
+
+            mImageLoader.setImage(info);
         }
 
+        /**
+         * Set the default image
+         */
+        void setDefaultRecipeImage() {
+            mImageImageView.setImageResource(getItem().getType().getImage(getContext()));
+        }
+
+        /**
+         * Cancel any in progresss ot pending requests
+         */
+        @Override
+        public void onViewRecycled() {
+            mImageLoader.cancel();
+        }
     }
 }

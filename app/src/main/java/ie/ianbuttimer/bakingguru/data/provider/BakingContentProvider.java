@@ -217,6 +217,7 @@ public class BakingContentProvider extends ContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
         long[] ids = null;
+        int inserted = 0;
         db.beginTransaction();
         try {
             int match = sUriMatcher.match(uri);
@@ -228,12 +229,17 @@ public class BakingContentProvider extends ContentProvider {
             }
             if (ids != null) {
                 notifyChange(uri, null);
+                for (long id : ids) {
+                    if (id != 0) {
+                        ++inserted;
+                    }
+                }
             }
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
-        return values.length;
+        return inserted;
     }
 
     private long[] insertValues(SQLiteDatabase db, String table, ContentValues[] values) {

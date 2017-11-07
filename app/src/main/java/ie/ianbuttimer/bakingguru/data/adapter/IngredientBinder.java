@@ -66,7 +66,7 @@ public class IngredientBinder extends AbstractBinder<Ingredient, IngredientBinde
     /**
      * ViewHolder class
      */
-    class ViewHolder extends ItemViewHolder<Ingredient> {
+    class ViewHolder extends ItemViewHolder<Ingredient> implements IViewHolder {
 
         @BindView(R.id.tv_quantity_ingredient_list_item) TextView mQuantityTextView;
         @BindView(R.id.tv_measure_ingredient_list_item) TextView mMeasureTextView;
@@ -86,6 +86,9 @@ public class IngredientBinder extends AbstractBinder<Ingredient, IngredientBinde
             mIngredientTextView.setText(info.getIngredient());
         }
 
-
+        @Override
+        public void onViewRecycled() {
+            // no op
+        }
     }
 }

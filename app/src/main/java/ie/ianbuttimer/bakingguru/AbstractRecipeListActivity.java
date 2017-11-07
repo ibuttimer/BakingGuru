@@ -258,19 +258,9 @@ public abstract class AbstractRecipeListActivity extends AppCompatActivity {
      * @param recipes   Recipes to save
      */
     private void startDbCacheIntentService(@NonNull String action, Recipe[] recipes) {
-        if ((recipes != null) && (recipes.length > 0)) {
-            int length = recipes.length;
+        ContentValues[] cvArray = RecipeContentValues.buildArray(recipes);
+        if ((cvArray != null) && (cvArray.length > 0)) {
             Intent intent = DbCacheIntentService.getLaunchIntent(this, action);
-            ContentValues[] cvArray = new ContentValues[length];
-            RecipeContentValues.Builder builder = RecipeContentValues.builder()
-                    .setTimestamp();
-
-            for (int i = 0; i < length; i++) {
-                builder.setJson(recipes[i].toJson())
-                        .setId(recipes[i].getId());
-                cvArray[i] = builder.build();
-            }
-
             intent.putExtra(CV_ARRAY_EXTRA, cvArray);
             this.startService(intent);
         }

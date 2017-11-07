@@ -112,9 +112,11 @@ public class UriUtils {
     public static @Nullable Uri urlToUri(@NonNull String urlString) {
         Uri uri = null;
         try {
-            URL url = new URL(urlString);
-            URI netUri = url.toURI();
-            uri = Uri.parse(netUri.toString());
+            if (!TextUtils.isEmpty(urlString)) {
+                URL url = new URL(urlString);
+                URI netUri = url.toURI();
+                uri = Uri.parse(netUri.toString());
+            }
         } catch (MalformedURLException e) {
             Timber.e("Invalid URL string", e);
         } catch (URISyntaxException e) {

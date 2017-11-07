@@ -94,5 +94,9 @@ public class IngredientAdapter extends AbstractBakeRecycleViewAdapter<Ingredient
             mIngredientTextView.setText(info.getIngredient());
         }
 
+        @Override
+        public void onViewRecycled() {
+            // no op
+        }
     }
 }

@@ -17,6 +17,7 @@
 
 package ie.ianbuttimer.bakingguru.bake;
 
+import android.text.TextUtils;
 import android.util.JsonReader;
 
 import org.parceler.Parcel;
@@ -41,6 +42,8 @@ public class Step extends AbstractBakeObject {
     public static final String THUMBNAIL_URL_KEY = "thumbnailURL";
 
     public static final int INVALID_ID = -1;
+
+    private enum URL_TYPE { UNKNOWN, EMPTY, VIDEO, IMAGE };
 
     int id;
     String shortDescription;
@@ -102,7 +105,7 @@ public class Step extends AbstractBakeObject {
             }
         }
         reader.endObject();
-        return step;
+        return sanityCheck(step);
     }
 
     /**
@@ -131,6 +134,50 @@ public class Step extends AbstractBakeObject {
     public static Step[] readStepsArray(JsonReader reader) throws IOException {
         List<Step> list = readStepsList(reader);
         return list.toArray(new Step[list.size()]);
+    }
+
+    /**
+     * Perform a sanity check on a Step object, and corrects any errors
+     * @param step    Object to check
+     * @return  object
+     */
+    public static Step sanityCheck(Step step) {
+        URL_TYPE video = checkUrl(step.videoURL);
+        URL_TYPE image = checkUrl(step.thumbnailURL);
+        if (((video == URL_TYPE.IMAGE) && (image == URL_TYPE.VIDEO))
+                || ((video == URL_TYPE.EMPTY) && (image == URL_TYPE.VIDEO))
+                || ((video == URL_TYPE.IMAGE) && (image == URL_TYPE.EMPTY))) {
+            // swap video & image urls
+            String temp = step.videoURL;
+            step.videoURL = step.thumbnailURL;
+            step.thumbnailURL = temp;
+        }
+        return step;
+    }
+
+    /**
+     * Check the specified url to see what it represents
+     * @param url   Url to check
+     * @return  Tuple object where
+     * <ul>
+     *     <li>T1: - <code>true</code> if url is empty</li>
+     *     <li>T2: - <code>true</code> if url represents a video</li>
+     *     <li>T3: - <code>true</code> if url represents an image</li>
+     * </ul>
+     */
+    private static URL_TYPE checkUrl(String url) {
+        String stdUrl = url.toLowerCase().trim();
+        URL_TYPE type;
+        if (TextUtils.isEmpty(url)) {
+            type = URL_TYPE.EMPTY;
+        } else if (stdUrl.endsWith(".mp4")) {
+            type = URL_TYPE.VIDEO;
+        } else if (stdUrl.endsWith(".png")) {
+            type = URL_TYPE.IMAGE;
+        } else {
+            type = URL_TYPE.UNKNOWN;;
+        }
+        return type;
     }
 
     @Override

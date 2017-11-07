@@ -23,7 +23,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import ie.ianbuttimer.bakingguru.BakingGuruApp;
 import timber.log.Timber;
@@ -34,19 +34,20 @@ import timber.log.Timber;
 @SuppressWarnings("unused")
 public class NetworkStatusReceiver extends BroadcastReceiver {
 
-    private static ArrayList<NetworkStatusListener> listeners;
+    private static CopyOnWriteArrayList<NetworkStatusListener> listeners;
 
     /**
      * Default constructor
      */
     public NetworkStatusReceiver() {
         super();
-        listeners = new ArrayList<>();
+        listeners = new CopyOnWriteArrayList<>();
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         boolean connected = isInternetAvailable(context);
+        Timber.d("NetworkStatusReceiver.onReceive[" + listeners.size() +"]: " + connected);
         for (NetworkStatusListener listener : listeners) {
             listener.onNetworkStatusChanged(connected);
         }
@@ -59,9 +60,12 @@ public class NetworkStatusReceiver extends BroadcastReceiver {
      */
     public static boolean registerListener(NetworkStatusListener listener) {
         boolean changed = false;
-        if ((listeners != null) && (listener != null)) {
-            if (!listeners.contains(listener)) {
-                changed = listeners.add(listener);
+        if (listener != null) {
+            if (listeners != null) {
+                if (!listeners.contains(listener)) {
+                    changed = listeners.add(listener);
+                }
+                Timber.d("NetworkStatusReceiver.registerListener[" + listeners.size() +"]: " + changed);
             }
         }
         return changed;
@@ -74,8 +78,11 @@ public class NetworkStatusReceiver extends BroadcastReceiver {
      */
     public static boolean unregisterListener(NetworkStatusListener listener) {
         boolean changed = false;
-        if ((listeners != null) && (listener != null)) {
-            changed = listeners.remove(listener);
+        if (listener != null) {
+            if (listeners != null) {
+                changed = listeners.remove(listener);
+            }
+            Timber.d("NetworkStatusReceiver.unregisterListener[" + listeners.size() +"]: " + changed);
         }
         return changed;
     }

@@ -11,7 +11,7 @@ The application supports pre-populating the database with data. This may be done
 * Set the <code>PREPOPULATE_DB</code> meta-data value in the manifest to <code>true</code>
 * Force the database to be recreated by incrementing <code>ie.ianbuttimer.bakingguru.data.db.BakingDbHelper.VERSION</code>, or uninstalling and reinstalling the application.
 
-The <code>baking.json</code> in the archive contains sample data, that is used for unit testing purposes.
+The <code>assets/baking.json</code> file contains sample data.
 
 ## Usage ##
 ### Application Widget ###

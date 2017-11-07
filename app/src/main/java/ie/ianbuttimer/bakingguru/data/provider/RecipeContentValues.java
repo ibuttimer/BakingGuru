@@ -17,10 +17,13 @@
 
 package ie.ianbuttimer.bakingguru.data.provider;
 
+import android.content.ContentValues;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.util.Date;
 
+import ie.ianbuttimer.bakingguru.bake.Recipe;
 import ie.ianbuttimer.bakingguru.utils.DbUtils;
 
 import static ie.ianbuttimer.bakingguru.data.db.BakingContract.RecipeEntry.COLUMN_JSON;
@@ -93,6 +96,28 @@ public class RecipeContentValues extends DbContentValues {
      */
     public static Builder builder() {
         return new Builder();
+    }
+
+    /**
+     * Build an array of recipes ContentValues
+     * @param recipes   Recipe array
+     * @return  ContentValues array or <code>null</code> if error
+     */
+    @Nullable public static ContentValues[] buildArray(Recipe[] recipes) {
+        ContentValues[] cvArray = null;
+        if ((recipes != null) && (recipes.length > 0)) {
+            int length = recipes.length;
+            cvArray = new ContentValues[length];
+            RecipeContentValues.Builder builder = RecipeContentValues.builder()
+                    .setTimestamp();
+
+            for (int i = 0; i < length; i++) {
+                builder.setJson(recipes[i].toJson())
+                        .setId(recipes[i].getId());
+                cvArray[i] = builder.build();
+            }
+        }
+        return cvArray;
     }
 
 }

@@ -17,19 +17,27 @@
 
 package ie.ianbuttimer.bakingguru;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import ie.ianbuttimer.bakingguru.bake.Recipe;
 import ie.ianbuttimer.bakingguru.data.FileReader;
+import ie.ianbuttimer.bakingguru.data.provider.RecipeContentValues;
+import ie.ianbuttimer.bakingguru.utils.Utils;
 import timber.log.Timber;
 
+import static ie.ianbuttimer.bakingguru.data.db.BakingContract.RecipeEntry.CONTENT_URI;
+import static ie.ianbuttimer.bakingguru.utils.DbUtils.DB_DELETE_ALL;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.assertEquals;
 
 
 /**
@@ -42,12 +50,16 @@ public class AbstractRecipeTest {
     static Recipe[] sRecipes;
 
     @BeforeClass
-    public static void onlyOnce() {
+    public static void onlyOnceBefore() {
         // Read the contents of the json file used to initially populate the database
-        Context context = InstrumentationRegistry.getTargetContext();
-        String path = context.getString(R.string.json_asset_file);
+        Context testContext = InstrumentationRegistry.getContext();
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        ContentResolver contentResolver = appContext.getContentResolver();
+        String path = appContext.getString(R.string.json_asset_file);
 
-        FileReader<Recipe, Recipe.Loader> reader = new FileReader<>(context, path, new Recipe.Loader());
+        boolean populate = Utils.getManifestMetaDataBoolean(appContext, appContext.getString(R.string.prepopulate_db_key), false);
+
+        FileReader<Recipe, Recipe.Loader> reader = new FileReader<>(testContext, path, new Recipe.Loader());
 
         try {
             sRecipes = reader.readArray();
@@ -57,6 +69,23 @@ public class AbstractRecipeTest {
 
         assertNotNull("Sample sRecipes", sRecipes);
         assertTrue("Sample sRecipes length", (sRecipes.length > 0));
+
+        // empty the database
+        contentResolver.delete(CONTENT_URI, DB_DELETE_ALL, null);
+
+        // populate db with test resources
+        ContentValues[] cvArray = RecipeContentValues.buildArray(sRecipes);
+        int inserted = contentResolver.bulkInsert(CONTENT_URI, cvArray);
+
+        assertEquals("Test data not loaded", cvArray.length, inserted);
     }
 
+
+    @AfterClass
+    public static void onlyOnceAfter() {
+        // clear the database
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        ContentResolver contentResolver = appContext.getContentResolver();
+        contentResolver.delete(CONTENT_URI, DB_DELETE_ALL, null);
+    }
 }

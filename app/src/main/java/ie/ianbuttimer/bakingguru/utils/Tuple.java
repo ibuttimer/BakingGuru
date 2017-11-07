@@ -17,8 +17,6 @@
 
 package ie.ianbuttimer.bakingguru.utils;
 
-import org.parceler.Parcel;
-
 /**
  * Three item tuple utility class
  */

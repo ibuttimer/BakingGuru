@@ -55,6 +55,15 @@ public class RecipeItemsAdapter extends RecyclerAdapter {
         registerBinder(stepBinder);
     }
 
+
+    @Override
+    public void onViewRecycled(ItemViewHolder holder) {
+        IViewHolder viewHolder = (IViewHolder) holder;
+        viewHolder.onViewRecycled();
+
+        super.onViewRecycled(holder);
+    }
+
     /**
      * Get an Ingredient control object
      * @return  new Ingredient control object

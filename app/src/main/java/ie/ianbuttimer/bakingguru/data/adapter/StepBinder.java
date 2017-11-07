@@ -18,6 +18,8 @@
 package ie.ianbuttimer.bakingguru.data.adapter;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ahamed.multiviewadapter.ItemViewHolder;
@@ -26,7 +28,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ie.ianbuttimer.bakingguru.R;
 import ie.ianbuttimer.bakingguru.bake.Step;
+import ie.ianbuttimer.bakingguru.image.AbstractImageLoader;
+import ie.ianbuttimer.bakingguru.image.ThumbnailImageLoader;
 
+import static ie.ianbuttimer.bakingguru.bake.IngredientsStep.INGREDIENTS_STEP_ID;
 import static ie.ianbuttimer.bakingguru.data.adapter.StepAdapter.getIdText;
 
 /**
@@ -65,27 +70,73 @@ public class StepBinder extends AbstractBinder<Step, StepBinder.ViewHolder> {
         return (item instanceof Step);
     }
 
+
+
+
     /**
      * ViewHolder class
      */
-    class ViewHolder extends ItemViewHolder<Step> {
+    class ViewHolder extends ItemViewHolder<Step> implements IViewHolder {
 
         @BindView(R.id.tv_number_step_list_item) TextView mNumberTextView;
         @BindView(R.id.tv_description_step_list_item) TextView mDescriptionTextView;
+        @BindView(R.id.iv_thumbnail_step_list_item) ImageView mImageImageView;
+        @BindView(R.id.pb_thumbnail_step_list_item) ProgressBar mImageProgressBar;
+
+        private BakeViewImageLoader<Step> mImageLoader;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
-
             setItemClickListener(getClickListener());
+
+            mImageLoader = new BakeViewImageLoader<>(mImageImageView, new BakeViewImageLoader.IBakeViewImageLoader<Step>() {
+                @Override
+                public void setDefaultImage() {
+                    setDefaultStepImage();
+                }
+
+                @Override
+                public AbstractImageLoader<Step> getNewImageLoader() {
+                    return new ThumbnailImageLoader(mImageImageView, mImageProgressBar);
+                }
+            });
         }
 
+        /**
+         * Set the details to display<br>
+         * @param info   Information object to use
+         */
         public void setViewInfo(Step info) {
             mNumberTextView.setText(getIdText(info));
             mDescriptionTextView.setText(info.getShortDescription());
+
+            if (info.getId() == INGREDIENTS_STEP_ID) {
+                // no image for ingredient step
+                mImageLoader.hideImage();
+            } else {
+                // set image
+                mImageLoader.showImage();
+                mImageLoader.setImage(info);
+            }
+
         }
 
+        /**
+         * Set the default image
+         */
+        void setDefaultStepImage() {
+            mImageImageView.setImageResource(R.drawable.ic_mixer);
+        }
+
+        /**
+         * Cancel any in progresss ot pending requests
+         */
+        @Override
+        public void onViewRecycled() {
+            mImageLoader.cancel();
+        }
 
     }
 }

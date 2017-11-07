@@ -21,6 +21,8 @@ package ie.ianbuttimer.bakingguru.data.adapter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -32,6 +34,10 @@ import butterknife.Unbinder;
 import ie.ianbuttimer.bakingguru.R;
 import ie.ianbuttimer.bakingguru.bake.AbstractBakeObject;
 import ie.ianbuttimer.bakingguru.bake.Step;
+import ie.ianbuttimer.bakingguru.image.AbstractImageLoader;
+import ie.ianbuttimer.bakingguru.image.ThumbnailImageLoader;
+
+import static ie.ianbuttimer.bakingguru.bake.IngredientsStep.INGREDIENTS_STEP_ID;
 
 /**
  * Adapter class for a RecyclerView of Step objects
@@ -63,6 +69,14 @@ public class StepAdapter extends AbstractBakeRecycleViewAdapter<Step> {
         return new StepViewHolder(view, clickHandler);
     }
 
+    @Override
+    public void onViewRecycled(AbstractBakeViewHolder holder) {
+        StepViewHolder viewHolder = (StepViewHolder) holder;
+        viewHolder.onViewRecycled();
+
+        super.onViewRecycled(holder);
+    }
+
     /**
      * Get the step id display text
      * @param info  Step
@@ -86,7 +100,10 @@ public class StepAdapter extends AbstractBakeRecycleViewAdapter<Step> {
 
         @BindView(R.id.tv_number_step_list_item) TextView mNumberTextView;
         @BindView(R.id.tv_description_step_list_item) TextView mDescriptionTextView;
+        @BindView(R.id.iv_thumbnail_step_list_item) ImageView mImageImageView;
+        @BindView(R.id.pb_thumbnail_step_list_item) ProgressBar mImageProgressBar;
 
+        private BakeViewImageLoader<Step> mImageLoader;
         private Unbinder unbinder;
 
         /**
@@ -98,6 +115,18 @@ public class StepAdapter extends AbstractBakeRecycleViewAdapter<Step> {
             super(view, clickHandler);
 
             unbinder = ButterKnife.bind(this, view);
+
+            mImageLoader = new BakeViewImageLoader<>(mImageImageView, new BakeViewImageLoader.IBakeViewImageLoader<Step>() {
+                @Override
+                public void setDefaultImage() {
+                    setDefaultStepImage();
+                }
+
+                @Override
+                public AbstractImageLoader<Step> getNewImageLoader() {
+                    return new ThumbnailImageLoader(mImageImageView, mImageProgressBar);
+                }
+            });
         }
 
 
@@ -106,6 +135,30 @@ public class StepAdapter extends AbstractBakeRecycleViewAdapter<Step> {
             super.setViewInfo(info);
             mNumberTextView.setText(getIdText(info));
             mDescriptionTextView.setText(info.getShortDescription());
+
+            if (info.getId() == INGREDIENTS_STEP_ID) {
+                // no image for ingredient step
+                mImageLoader.hideImage();
+            } else {
+                // set image
+                mImageLoader.showImage();
+                mImageLoader.setImage(info);
+            }
+        }
+
+        /**
+         * Set the default image
+         */
+        void setDefaultStepImage() {
+            mImageImageView.setImageResource(R.drawable.ic_mixer);
+        }
+
+        /**
+         * Cancel any in progresss ot pending requests
+         */
+        @Override
+        public void onViewRecycled() {
+            mImageLoader.cancel();
         }
 
     }

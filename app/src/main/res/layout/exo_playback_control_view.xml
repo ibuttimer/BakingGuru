@@ -66,10 +66,10 @@
         <TextView android:id="@id/exo_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="@dimen/player_control_text"
             android:textStyle="bold"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
+            android:paddingLeft="@dimen/player_control_text_padding"
+            android:paddingRight="@dimen/player_control_text_padding"
             android:includeFontPadding="false"
             android:textColor="@color/colorPlayerControlText"/>
 
@@ -77,15 +77,15 @@
             android:id="@id/exo_progress"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="26dp"/>
+            android:layout_height="@dimen/player_control_time_bar_height"/>
 
         <TextView android:id="@id/exo_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="@dimen/player_control_text"
             android:textStyle="bold"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
+            android:paddingLeft="@dimen/player_control_text_padding"
+            android:paddingRight="@dimen/player_control_text_padding"
             android:includeFontPadding="false"
             android:textColor="@color/colorPlayerControlText"/>
 

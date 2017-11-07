@@ -27,7 +27,7 @@ import ie.ianbuttimer.bakingguru.bake.AbstractBakeObject;
  * A base RecyclerView.ViewHolder for AbstractBakeObject objects
  */
 @SuppressWarnings("unused")
-abstract class AbstractBakeViewHolder<T extends AbstractBakeObject> extends RecyclerView.ViewHolder implements View.OnClickListener {
+abstract class AbstractBakeViewHolder<T extends AbstractBakeObject> extends RecyclerView.ViewHolder implements View.OnClickListener, IViewHolder {
 
     private final View mView;
     private IAdapterOnClickHandler<T> mClickHandler;
@@ -38,7 +38,7 @@ abstract class AbstractBakeViewHolder<T extends AbstractBakeObject> extends Recy
      * @param view          View to hold
      * @param clickHandler  onClick handler for view
      */
-    public AbstractBakeViewHolder(View view, IAdapterOnClickHandler<T> clickHandler) {
+    AbstractBakeViewHolder(View view, IAdapterOnClickHandler<T> clickHandler) {
         super(view);
 
         mView = view;
@@ -61,6 +61,14 @@ abstract class AbstractBakeViewHolder<T extends AbstractBakeObject> extends Recy
      */
     public View getView() {
         return mView;
+    }
+
+    /**
+     * Get the object associated with this view
+     * @return  object
+     */
+    public T getItem() {
+        return mItem;
     }
 
     /**

@@ -24,8 +24,8 @@ android {
         applicationId "ie.ianbuttimer.bakingguru"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -33,6 +33,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        test {
+            resources.srcDirs += ['src/test/resources']
+        }
+        androidTest {
+            resources.srcDirs += ['src/androidTest/resources']
         }
     }
 }
@@ -67,6 +75,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.github.devahamed:multi-view-adapter:1.2.3'
     compile 'com.android.support:preference-v7:26.0.0-alpha1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 
 
