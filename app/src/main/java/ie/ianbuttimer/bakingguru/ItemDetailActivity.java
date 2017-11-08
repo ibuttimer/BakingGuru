@@ -47,7 +47,7 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailF
     private Parcelable mItem;       // recipe displayed
     private int mStep;              // current instruction step
 
-    // expresso test related
+    // espresso test related
     @Nullable
     private SimpleIdlingResource mIdlingResource;
 

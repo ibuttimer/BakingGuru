@@ -87,7 +87,7 @@ public class MainActivity extends AbstractRecipeListActivity implements IAdapter
             };
 
 
-    // expresso test related
+    // espresso test related
     @Nullable private SimpleIdlingResource mIdlingResource;
 
     /**

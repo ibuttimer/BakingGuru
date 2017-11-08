@@ -25,6 +25,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.test.espresso.IdlingResource;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -91,7 +93,7 @@ public class ItemListActivity extends AppCompatActivity implements ItemDetailFra
 
     private ScreenMode mScreenMode;
 
-    // expresso test related
+    // espresso test related
     @Nullable private SimpleIdlingResource mIdlingResource;
 
     /**
@@ -135,6 +137,21 @@ public class ItemListActivity extends AppCompatActivity implements ItemDetailFra
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
+        if (mScreenMode.isTwoPanelMode() && isChangingConfigurations()) {
+            /* remove detail fragment as after the orientation change, app will go back to
+                just the list, and don't want the fragment being recreated when there is nowhere
+                to display it (also don't want the media player playing in the background)
+             */
+            FragmentManager manager = getSupportFragmentManager();
+            Fragment fragment = manager.findFragmentById(R.id.item_detail_container);
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(fragment)
+                        .commit();
+            }
+        }
+
         super.onSaveInstanceState(outState);
 
         outState.putParcelable(ARG_ITEM, Parcels.wrap(mRecipe));
